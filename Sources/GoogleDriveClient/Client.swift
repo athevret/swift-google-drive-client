@@ -9,7 +9,8 @@ public struct Client: Sendable {
     getFileData: GetFileData,
     createFile: CreateFile,
     updateFileData: UpdateFileData,
-    deleteFile: DeleteFile
+    deleteFile: DeleteFile,
+    executeScript: ExecuteScript
   ) {
     self.auth = auth
     self.getAbout = getAbout
@@ -19,6 +20,7 @@ public struct Client: Sendable {
     self.createFile = createFile
     self.updateFileData = updateFileData
     self.deleteFile = deleteFile
+    self.executeScript = executeScript
   }
 
   public var auth: Auth
@@ -29,6 +31,7 @@ public struct Client: Sendable {
   public var createFile: CreateFile
   public var updateFileData: UpdateFileData
   public var deleteFile: DeleteFile
+  public var executeScript: ExecuteScript
 }
 
 extension Client {
@@ -84,6 +87,11 @@ extension Client {
       keychain: keychain,
       httpClient: httpClient
     )
+    let executeScript = ExecuteScript.live(
+      auth: auth,
+      keychain: keychain,
+      httpClient: httpClient
+    )
     return Client(
       auth: auth,
       getAbout: getAbout,
@@ -92,7 +100,8 @@ extension Client {
       getFileData: getFileData,
       createFile: createFile,
       updateFileData: updateFileData,
-      deleteFile: deleteFile
+      deleteFile: deleteFile,
+      executeScript: executeScript
     )
   }
 }
